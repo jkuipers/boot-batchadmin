@@ -20,14 +20,21 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 // FreeMarker is only used in the Batch Admin child context
 @SpringBootApplication(exclude = FreeMarkerAutoConfiguration.class)
 @EnableBatchProcessing
-public class BootBatchAdminDemoApplication {
+public class BootBatchAdminDemoApplication extends WebMvcConfigurerAdapter {
 
     public static void main(String[] args) {
         SpringApplication.run(BootBatchAdminDemoApplication.class, args);
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/", "/batch/");
     }
 
     @Bean

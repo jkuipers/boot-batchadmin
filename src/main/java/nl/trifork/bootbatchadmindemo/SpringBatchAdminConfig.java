@@ -9,7 +9,6 @@ import org.springframework.batch.admin.web.resources.DefaultResourceService;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -17,7 +16,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Configuration
 @ImportResource({ "classpath:META-INF/spring/batch/servlet/manager/manager-context.xml",
                   "classpath:META-INF/spring/batch/servlet/resources/resources-context.xml" })
 @Import({ JobController.class, StepExecutionController.class, JobExecutionController.class, SpringBatchAdminConfig.FilesController.class })
@@ -29,7 +27,7 @@ public class SpringBatchAdminConfig {
     }
 
     @Bean(autowire = Autowire.BY_TYPE)
-    SimpleJobServiceFactoryBean simpleJobServiceFactoryBean() {
+    SimpleJobServiceFactoryBean simpleJobService() {
         return new SimpleJobServiceFactoryBean();
     }
 
